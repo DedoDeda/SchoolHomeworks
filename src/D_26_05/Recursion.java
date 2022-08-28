@@ -45,13 +45,13 @@ public class Recursion {
     }
 
     public static int modulo(int a, int b) {
-        // Input check (relevant only at the first call)
+        // Input check (relevant only at the first call).
         if (!(a > 0 && b > 0))
             return 0;
         if (a < b)
             return a;
 
-        // Calculation
+        // Calculation.
         if (a - b < b)
             return a - b;
 

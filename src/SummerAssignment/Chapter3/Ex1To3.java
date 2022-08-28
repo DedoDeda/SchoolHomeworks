@@ -1,11 +1,9 @@
-package SummerAssignment.Task3;
+package SummerAssignment.Chapter3;
 
 public class Ex1To3 {
 
     public static void main(String[] args) {
-        char[] arr1 = {};
-        char[] arr2 = {};
-        System.out.println(equals(arr1, arr2));
+
     }
 
     public static boolean equals(char[] arr1, char[] arr2) {
@@ -20,13 +18,13 @@ public class Ex1To3 {
         return arr1[index] == arr2[index] && equals(arr1, arr2, index + 1);
     }
 
-    // TODO: Check from here.
     public static boolean isSorted(int[] arr) {
         return isSorted(arr, 0);
     }
 
-    public static boolean isSorted(int[] arr, int index) {
-        if (index == arr.length - 1) {
+    private static boolean isSorted(int[] arr, final int index) {
+        // For an empty array: (arr.length - 1) = -1 < index = 0, so ">=" is needed for this edge case.
+        if (index >= arr.length - 1) {
             return true;
         }
 
@@ -37,12 +35,15 @@ public class Ex1To3 {
         return isPalindrome(string, 0);
     }
 
-    public static boolean isPalindrome(String string, int index) {
-        int length = string.length();
-        if (index * 2 >= string.length()) {
+    private static boolean isPalindrome(String string, final int index) {
+        final int length = string.length();
+
+        final boolean reachedStrMiddle = index * 2 >= length;
+        if (reachedStrMiddle) {
             return true;
         }
 
-        return string.charAt(index) == string.charAt(length - index - 1) && isPalindrome(string, index + 1);
+        final int symmetricIndex = length - 1 - index;
+        return string.charAt(index) == string.charAt(symmetricIndex) && isPalindrome(string, index + 1);
     }
 }
