@@ -3,13 +3,16 @@ package SummerAssignment.Task3;
 public class Ex1To3 {
 
     public static void main(String[] args) {
+        char[] arr1 = {};
+        char[] arr2 = {};
+        System.out.println(equals(arr1, arr2));
     }
 
     public static boolean equals(char[] arr1, char[] arr2) {
         return equals(arr1, arr2, 0);
     }
 
-    public static boolean equals(char[] arr1, char[] arr2, int index) {
+    private static boolean equals(char[] arr1, char[] arr2, int index) {
         if (index == arr1.length) {
             return true;
         }
@@ -17,6 +20,7 @@ public class Ex1To3 {
         return arr1[index] == arr2[index] && equals(arr1, arr2, index + 1);
     }
 
+    // TODO: Check from here.
     public static boolean isSorted(int[] arr) {
         return isSorted(arr, 0);
     }
@@ -25,6 +29,7 @@ public class Ex1To3 {
         if (index == arr.length - 1) {
             return true;
         }
+
         return arr[index + 1] >= arr[index] && isSorted(arr, index + 1);
     }
 

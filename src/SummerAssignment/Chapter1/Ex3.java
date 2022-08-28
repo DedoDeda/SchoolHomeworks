@@ -1,10 +1,12 @@
-package SummerAssignment.Task1;
+package SummerAssignment.Chapter1;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Ex3 {
 
     public static void main(String[] args) {
+
     }
 
     public static class Pixel {
@@ -17,7 +19,7 @@ public class Ex3 {
 
          public Pixel(int r, int g, int b) {
             if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Out of range RGB value(s).");
             }
 
             this.r = r;
@@ -87,7 +89,7 @@ public class Ex3 {
                 }
             }
 
-            return rCount == gCount && gCount == bCount;
+            return rCount == gCount && rCount == bCount;
         }
 
         public boolean isBlackAndWhite() {
@@ -108,6 +110,11 @@ public class Ex3 {
             }
 
             return hasBlack && hasWhite;
+        }
+
+        @Override
+        public String toString() {
+            return "Structure{ pixels = " + Arrays.toString(pixels) + " }";
         }
     }
 }
