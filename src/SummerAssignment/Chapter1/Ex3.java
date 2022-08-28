@@ -114,7 +114,7 @@ public class Ex3 {
 
         @Override
         public String toString() {
-            return "Structure{pixels=" + Arrays.toString(pixels) + "}";
+            return "Structure{pixels=" + Arrays.toString(pixels) + '}';
         }
     }
 }
