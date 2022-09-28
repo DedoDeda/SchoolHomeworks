@@ -1,7 +1,7 @@
 package _29_09_22;
 
 import java.util.Scanner;
-import java.util.Stack;
+import unit4.collectionsLib.*;
 
 public class StackPractice {
 
