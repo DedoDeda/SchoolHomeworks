@@ -89,4 +89,89 @@ public class StackUtils {
 
         return result;
     }
+
+    public static <T> Stack<T> getExtended(Stack<T> s1, Stack<T> s2) {
+        Stack<T> temp = new Stack<>();
+        Stack<T> res = new Stack<>();
+
+        while (!s1.isEmpty()) {
+            T e = s1.pop();
+            res.push(e);
+            temp.push(e);
+        }
+        while (!temp.isEmpty()) {
+            s1.push(temp.pop());
+        }
+
+        while (!s2.isEmpty()) {
+            T e = s2.pop();
+            res.push(e);
+            temp.push(e);
+        }
+        while (!temp.isEmpty()) {
+            s2.push(temp.pop());
+        }
+
+        return res;
+    }
+    /**
+     * O(n^2)
+     */
+    public static void sortAcc(Stack<Integer> stack) {
+        Stack<Integer> temp = new Stack<>();
+        while (!stack.isEmpty()) {
+            int max = findMax(stack);
+            findAndPop(stack, max);
+            temp.push(max);
+        }
+
+        while (!temp.isEmpty()) {
+            stack.push(temp.pop());
+        }
+    }
+
+    /**
+     * O(n)
+     * @implNote Compares with the == operator.
+     */
+    public static <T> void findAndPop(Stack<T> stack, T target) {
+        Stack<T> temp = new Stack<>();
+        while (!stack.isEmpty()) {
+            T e = stack.pop();
+            if (e == target) {
+                break;
+            }
+
+            temp.push(e);
+        }
+
+        while (!temp.isEmpty()) {
+            stack.push(temp.pop());
+        }
+    }
+
+    /**
+     * O(n)
+     * @param stack Non-empty stack.
+     */
+    public static int findMax(Stack<Integer> stack) {
+        Stack<Integer> temp = new Stack<>();
+        int max = stack.pop();
+        temp.push(max);
+        while (!stack.isEmpty()) {
+            int e = stack.pop();
+            temp.push(e);
+            if (e > max) {
+                max = e;
+            }
+        }
+
+        while (!temp.isEmpty()) {
+            stack.push(temp.pop());
+        }
+
+        return max;
+    }
+
+
 }

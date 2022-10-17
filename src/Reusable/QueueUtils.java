@@ -46,7 +46,7 @@ public class QueueUtils {
         return copy;
     }
 
-    /** @implNote Compares by address - not by value. */
+    /** @implNote Compares with the == operator. */
     public static <T> int countAndRemove(Queue<T> q, T target) {
         Queue<T> temp = new Queue<>();
         int count = 0;
@@ -66,5 +66,44 @@ public class QueueUtils {
         }
 
         return count;
+    }
+
+    /**
+     * Compares by the == operator.
+     */
+    public static <T> boolean equals(Queue<T> q1, Queue<T> q2) {
+        boolean equals = true;
+
+        Queue<T> temp1 = new Queue<>();
+        Queue<T> temp2 = new Queue<>();
+        while (!q1.isEmpty() && !q2.isEmpty()) {
+            T e1 = q1.remove();
+            T e2 = q2.remove();
+
+            temp1.insert(e1);
+            temp2.insert(e2);
+
+            if (e1 != e2) {
+                equals = false;
+            }
+        }
+
+        while (!q1.isEmpty()) {
+            temp1.insert(q1.remove());
+            equals = false;
+        }
+        while (!q2.isEmpty()) {
+            temp2.insert(q2.remove());
+            equals = false;
+        }
+
+        while (!temp1.isEmpty()) {
+            q1.insert(temp1.remove());
+        }
+        while (!temp2.isEmpty()) {
+            q2.insert(temp2.remove());
+        }
+
+        return equals;
     }
 }
