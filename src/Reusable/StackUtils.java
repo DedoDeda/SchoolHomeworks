@@ -14,6 +14,12 @@ public class StackUtils {
         return stack;
     }
 
+    public static <T> void retrieve(Stack<T> temp, Stack<T> orig) {
+        while (!temp.isEmpty()) {
+            orig.push(temp.pop());
+        }
+    }
+
     public static <T> boolean exists(Stack<T> stack, T target) {
         boolean exists = false;
         Stack<T> temp = new Stack<>(); // Temp stack.
