@@ -58,7 +58,8 @@ public class Node<T>
     {
         return(this.info);
     }
-    
+
+    @Deprecated
      /**
   * <dt dir="rtl" >
      * <b>
