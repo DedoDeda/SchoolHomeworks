@@ -9,14 +9,11 @@ public class ListUtils {
         if (elems.length == 0) {
             return null;
         }
-        if (elems.length == 1) {
-            return new Node<T>(elems[0]);
-        }
 
         Node<T> head = new Node<>(elems[0]);
         Node<T> node = head;
 
-        for (int i = 0; i < elems.length - 1; i++) {
+        for (int i = 1; i < elems.length; i++) {
             Node<T> next = new Node<>(elems[i]);
             node.setNext(next);
             node = next;
@@ -46,8 +43,8 @@ public class ListUtils {
         Node<T> node1 = head1;
         Node<T> node2 = head2;
 
-        while (node1.hasNext() && node2.hasNext()) {
-            if (node1.getNext().getValue() != node2.getNext().getValue()) {
+        while (node1 != null && node2 != null) {
+            if (node1.getValue() != node2.getValue()) {
                 return false;
             }
 
@@ -55,6 +52,16 @@ public class ListUtils {
             node2 = node2.getNext();
         }
 
-        return !(node1.hasNext() || node2.hasNext());
+        return node1 == null && node2 == null;
+    }
+
+    public static <T> String toString(Node<T> head) {
+        StringBuilder builder = new StringBuilder();
+        for (Node<T> node = head; node != null; node = node.getNext()) {
+            builder.append('[').append(node).append("]->");
+        }
+        builder.append("null");
+
+        return builder.toString();
     }
 }
