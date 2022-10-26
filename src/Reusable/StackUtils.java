@@ -123,7 +123,7 @@ public class StackUtils {
     /**
      * O(n^2)
      */
-    public static void sortAcc(Stack<Integer> stack) {
+    public static void sortAsc(Stack<Integer> stack) {
         Stack<Integer> temp = new Stack<>();
         while (!stack.isEmpty()) {
             int max = findMax(stack);
@@ -178,6 +178,4 @@ public class StackUtils {
 
         return max;
     }
-
-
 }

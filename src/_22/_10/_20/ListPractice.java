@@ -16,7 +16,7 @@ public class ListPractice {
         return ListUtils.maxNode(head);
     }
 
-    public static int calcMaxAccSeqSize(Node<Integer> head) {
+    public static int calcMaxAscSeqSize(Node<Integer> head) {
         int maxSeqSize = 0;
         int currentSeqSize = 1;
         int prev = head.getValue();
@@ -46,6 +46,6 @@ public class ListPractice {
     }
 
     public static boolean equals(Node<Integer> head1, Node<Integer> head2) {
-        return ListUtils.equals(head1, head2);
+        return ListUtils.valsEqual(head1, head2);
     }
 }

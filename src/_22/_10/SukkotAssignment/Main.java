@@ -15,7 +15,7 @@ public class Main {
      */
     public static Stack<Integer> mergeSorted(Stack<Integer> s1, Stack<Integer> s2) {
         Stack<Integer> res = StackUtils.getExtended(s1, s2);
-        StackUtils.sortAcc(res);
+        StackUtils.sortAsc(res);
         return res;
     }
 

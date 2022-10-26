@@ -23,7 +23,7 @@ public class Main {
 
         int[] arr = makeRandomArray(n, 1, 101, random);
         System.out.println(Arrays.toString(arr));
-        bubbleSortAcc(arr);
+        bubbleSortAsc(arr);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -53,7 +53,7 @@ public class Main {
         return res;
     }
 
-    public static void bubbleSortAcc(int[] arr) {
+    public static void bubbleSortAsc(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
@@ -87,11 +87,11 @@ public class Main {
             points[i] = Vec2.makeRandom(2, 15, random);
         }
         System.out.println(Arrays.toString(points));
-        selectionSortAcc(points);
+        selectionSortAsc(points);
         System.out.println(Arrays.toString(points));
     }
 
-    public static void selectionSortAcc(Vec2[] arr) {
+    public static void selectionSortAsc(Vec2[] arr) {
         for (int i = 0; i < arr.length; i++) {
             int indexOfMin = i;
             for (int j = i + 1; j < arr.length; j++) {
