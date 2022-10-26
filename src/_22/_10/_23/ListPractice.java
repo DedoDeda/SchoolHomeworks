@@ -6,6 +6,10 @@ import unit4.collectionsLib.Node;
 public class ListPractice {
 
     public static void main(String[] args) {
+        var lst1 = ListUtils.make(2, 5);
+        var lst2 = ListUtils.make(10, 15);
+        var res = mergeSortedAsc(lst1, lst2);
+        System.out.println(ListUtils.toString(res));
     }
 
     /**
@@ -35,25 +39,22 @@ public class ListPractice {
         }
         Node<Integer> newPos = newHead;
 
-        for (; pos1 != null; pos1 = pos1.getNext()) {
-            // Get the current pos1's value.
-            int val1 = pos1.getValue();
-            for (; pos2 != null; pos2 = pos2.getNext()) {
-                // Get the current pos2's value.
-                int val2 = pos2.getValue();
-                // If val1 <= val2, val1 exit and insert val1 first.
-                if (val1 <= val2) {
-                    break;
-                }
-
-                newPos = ListUtils.insertAfter(newPos, val2);
+        while (pos1 != null && pos2 != null) {
+            if (pos1.getValue() < pos2.getValue()) {
+                newPos = ListUtils.insertAfter(newPos, pos1.getValue());
+                pos1 = pos1.getNext();
             }
-
-            newPos = ListUtils.insertAfter(newPos, val1);
+            else {
+                newPos = ListUtils.insertAfter(newPos, pos2.getValue());
+                pos2 = pos2.getNext();
+            }
         }
 
-        for (; pos2 != null; pos2 = pos2.getNext()) {
-            newPos = ListUtils.insertAfter(newPos, pos2.getValue());
+        if (pos1 == null) {
+            newPos.setNext(pos2);
+        }
+        else { // pos2 = null
+            newPos.setNext(pos1);
         }
 
         return newHead;
