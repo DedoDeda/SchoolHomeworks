@@ -177,6 +177,27 @@ public class ListUtils {
         return head;
     }
 
+    /** Removes the first occurrence. */
+    public static <T> Node<T> remove(Node<T> list, T target) {
+        if (list == null) {
+            return null;
+        }
+
+        if (list.getValue() == target) {
+            return list.getNext();
+        }
+
+        for (Node<T> pos = list; pos.hasNext(); pos = pos.getNext()) {
+            Node<T> next = pos.getNext();
+            if (next.getValue() == target) {
+                pos.setNext(next.getNext());
+                return list;
+            }
+        }
+
+        return list;
+    }
+
     public static <T> String toString(Node<T> head) {
         StringBuilder builder = new StringBuilder();
         for (Node<T> node = head; node != null; node = node.getNext()) {
@@ -186,5 +207,6 @@ public class ListUtils {
 
         return builder.toString();
     }
+
 
 }

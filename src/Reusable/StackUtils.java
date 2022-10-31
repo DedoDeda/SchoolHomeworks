@@ -7,16 +7,17 @@ public class StackUtils {
     @SafeVarargs
     public static <T> Stack<T> make(T... elems) {
         Stack<T> stack = new Stack<>();
-        for (T e : elems) {
+        for (int i = elems.length - 1; i >= 0; i--) {
+            T e = elems[i];
             stack.push(e);
         }
 
         return stack;
     }
 
-    public static <T> void retrieve(Stack<T> temp, Stack<T> orig) {
-        while (!temp.isEmpty()) {
-            orig.push(temp.pop());
+    public static <T> void move(Stack<T> source, Stack<T> dest) {
+        while (!source.isEmpty()) {
+            dest.push(source.pop());
         }
     }
 
@@ -178,4 +179,68 @@ public class StackUtils {
 
         return max;
     }
+
+    /**
+     * @implNote Index 0 is the top. Compares the values using the == operator.
+     */
+    public static <T> int indexOf(Stack<T> stack, T target) {
+        Stack<T> copy = copy(stack);
+
+        int index = 0;
+        while (!copy.isEmpty()) {
+            if (target == copy.pop()) {
+                return index;
+            }
+            index++;
+        }
+
+        // Doesn't exist.
+        return -1;
+    }
+
+    /**
+     * @param index less than the stack's size.
+     */
+    public static <T> void popAt(Stack<T> stack, int index) {
+        if (stack.isEmpty()) {
+            return;
+        }
+
+        // 0, 1, 2
+        Stack<T> temp = new Stack<>();
+        for (int i = 0; i < index; i++) {
+            temp.push(stack.pop());
+        }
+        stack.pop();
+        StackUtils.move(temp, stack);
+    }
+
+    /**
+     * @implNote Index 0 is the top. Compares the values using the == operator.
+     */
+    public static <T> void popAllOccurrences(Stack<T> stack, T target) {
+        Stack<T> temp = new Stack<>();
+
+        while (!stack.isEmpty()) {
+            T e = stack.pop();
+            if (e != target) {
+                temp.push(e);
+            }
+        }
+        StackUtils.move(temp, stack);
+    }
+
+    public static <T> Stack<T> getReversed(Stack<T> stack) {
+        Stack<T> temp = new Stack<>();
+        Stack<T> reverse = new Stack<>();
+        while (!stack.isEmpty()) {
+            T e = stack.pop();
+            temp.push(e);
+            reverse.push(e);
+        }
+        move(temp, stack);
+
+        return reverse;
+    }
+
 }
