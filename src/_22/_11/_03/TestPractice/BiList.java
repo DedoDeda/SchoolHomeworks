@@ -25,14 +25,14 @@ public class BiList {
         final int halfSize = ListUtils.size(lst) / 2;
 
         Node<Integer> max = ListUtils.maxNode(lst);
-        Node<Integer> lst2 = ListUtils.remove(lst, max.getValue());
+        Node<Integer> lst2 = ListUtils.removeFirstOccur(lst, max.getValue());
         Node<Integer> lst1 = new Node<>(max.getValue());
         Node<Integer> pos1 = lst1;
 
         for (int i = 1; i < halfSize; i++) {
             System.out.println();
             max = ListUtils.maxNode(lst2);
-            lst2 = ListUtils.remove(lst2, max.getValue());
+            lst2 = ListUtils.removeFirstOccur(lst2, max.getValue());
             pos1.setNext(new Node<>(max.getValue()));
             pos1 = lst1.getNext();
         }

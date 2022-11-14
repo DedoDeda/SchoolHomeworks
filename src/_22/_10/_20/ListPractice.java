@@ -8,19 +8,19 @@ public class ListPractice {
     public static void main(String[] args) {
     }
 
-    public static int max(Node<Integer> head) {
-        return ListUtils.maxNode(head).getValue();
+    public static int max(Node<Integer> list) {
+        return ListUtils.maxNode(list).getValue();
     }
 
-    public static Node<Integer> maxNode(Node<Integer> head) {
-        return ListUtils.maxNode(head);
+    public static Node<Integer> maxNode(Node<Integer> list) {
+        return ListUtils.maxNode(list);
     }
 
-    public static int calcMaxAscSeqSize(Node<Integer> head) {
+    public static int calcMaxAscSeqSize(Node<Integer> list) {
         int maxSeqSize = 0;
         int currentSeqSize = 1;
-        int prev = head.getValue();
-        Node<Integer> node = head;
+        int prev = list.getValue();
+        Node<Integer> node = list;
 
         while (node.hasNext()) {
             node = node.getNext();
@@ -45,7 +45,7 @@ public class ListPractice {
         return maxSeqSize;
     }
 
-    public static boolean equals(Node<Integer> head1, Node<Integer> head2) {
-        return ListUtils.valsEqual(head1, head2);
+    public static boolean equals(Node<Integer> list1, Node<Integer> list2) {
+        return ListUtils.equals(list1, list2);
     }
 }
