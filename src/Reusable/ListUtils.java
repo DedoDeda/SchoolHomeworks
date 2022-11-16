@@ -97,6 +97,26 @@ public class ListUtils {
         return size;
     }
 
+    /** Copies the list's nodes, and values (using the Copyable interface). */
+    public static <T extends Copyable<T>> Node<T> deepCopy(Node<T> list) {
+        // If the list is empty, just return an empty list (null).
+        if (list == null) {
+            return null;
+        }
+
+        // Init the list.
+        Node<T> copy = new Node<>(list.getValue().copy());
+        for (Node<T> pos = list, copyPos = copy;
+             pos.hasNext();
+             pos = pos.getNext(), copyPos = copyPos.getNext()) {
+            // Copy and add to the copy list.
+            T nextVal = pos.getNext().getValue().copy();
+            copyPos.setNext(new Node<>(nextVal));
+        }
+
+        return copy;
+    }
+
     public static <T> Node<T> copy(Node<T> list) {
         if (list == null) {
             return null;
@@ -237,7 +257,10 @@ public class ListUtils {
         return list;
     }
 
+    /** Finds a node in the list using a user defined predicate. */
     public static <T> Node<T> findNode(Node<T> list, Predicate<Node<T>> findCond) {
+        /* Iterate over the list and return the node for which findCond.test() returns true.
+        If not found return null. */
         for (Node<T> pos = list; pos != null; pos = pos.getNext()) {
             if (findCond.test(pos)) {
                 return pos;
