@@ -2,12 +2,15 @@ package _22._11._03._14.ListTask;
 
 public class ListTaskMain {
 
+    /** Merges two phone books, without duplicated contacts. */
     public static PhoneBook mergePhoneBooks(PhoneBook pb1, PhoneBook pb2) {
         PhoneBook result = new PhoneBook();
+        // Deep copy pb1 into the result.
         for (String name : pb1.getAllContactsNames()) {
             result.addContact(name, pb1.getPhone(name));
         }
 
+        // Extend the result by pb2.
         for (String name : pb2.getAllContactsNames()) {
             // Add only if the contact isn't int the result.
             if (result.getPhone(name) == null) {
