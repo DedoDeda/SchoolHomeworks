@@ -17,88 +17,6 @@ public class PhoneBook {
     Node<Contact> contacts;
 
     /**
-     * Merge two phone books into a new book, keeping the result sorted,
-     * and without duplicated contacts.
-     */
-    public static PhoneBook merge(PhoneBook book1, PhoneBook book2) {
-        // If one of the books (or both) is empty, return a copy of the other one.
-        if (book1.contacts == null) {
-            return new PhoneBook(book2);
-        }
-        if (book2.contacts == null) {
-            return new PhoneBook(book1);
-        }
-
-        // The merged contact list.
-        Node<Contact> mergedContacts;
-        // Positions for iteration over the two contact lists.
-        Node<Contact> pos1 = book1.contacts;
-        Node<Contact> pos2 = book2.contacts;
-
-        // Make a first node to the new list.
-        int comparisonRes = pos1.getValue().name.compareTo(pos2.getValue().name);
-        if (comparisonRes < 0) {
-            // pos1's name should be before pos2's name.
-            mergedContacts = new Node<>(pos1.getValue());
-            pos1 = pos1.getNext();
-        } else if (comparisonRes == 0) {
-            // The names are the same, so add one of them, but
-            // increase both positions. (We don't want duplicates.)
-            mergedContacts = new Node<>(pos1.getValue());
-            pos1 = pos1.getNext();
-            pos2 = pos2.getNext();
-        } else {
-            // pos2's name should be before pos1's name.
-            mergedContacts = new Node<>(pos2.getValue());
-            pos2 = pos2.getNext();
-        }
-        // Set a position node to the merged list.
-        Node<Contact> mergedPos = mergedContacts;
-
-        /* As long as we aren't done with one of the lists (or both),
-        continue. */
-        while (pos1 != null && pos2 != null) {
-            // The result of the comparison between the two current contacts' names.
-            comparisonRes = pos1.getValue().name.compareTo(pos2.getValue().name);
-            if (comparisonRes < 0) {
-                // pos1's name should be before pos2's name.
-                mergedPos = ListUtils.insertAfter(mergedPos, pos1.getValue());
-                pos1 = pos1.getNext();
-            } else if (comparisonRes == 0) {
-                // The names are the same, so add one of them, but
-                // increase both positions. (We don't want duplicates.)
-                mergedPos = ListUtils.insertAfter(mergedPos, pos1.getValue());
-                pos1 = pos1.getNext();
-                pos2 = pos2.getNext();
-            } else {
-                // pos2's name should be before pos1's name.
-                mergedPos = ListUtils.insertAfter(mergedPos, pos2.getValue());
-                pos2 = pos2.getNext();
-            }
-        }
-
-        // If one of the lists isn't over yet, extend the result by its copy.
-        if (pos1 == null) {
-            mergedPos.setNext(ListUtils.deepCopy(pos2));
-        } else { // pos2 = null
-            mergedPos.setNext(ListUtils.deepCopy(pos1));
-        }
-
-        // Simply creating the book via the constructor will copy the given list,
-        // but this list is already a copy.
-        return makeFromListRef(mergedContacts);
-    }
-
-    /**
-     * Makes a new book, given a contacts list, without copying the list.
-     */
-    private static PhoneBook makeFromListRef(Node<Contact> list) {
-        PhoneBook book = new PhoneBook();
-        book.contacts = list;
-        return book;
-    }
-
-    /**
      * Makes an empty phone book.
      */
     public PhoneBook() {
@@ -219,13 +137,17 @@ public class PhoneBook {
          */
         private String phone;
 
-        /** Makes a contact given its name and phone. */
+        /**
+         * Makes a contact given its name and phone.
+         */
         public Contact(String name, String phone) {
             this.name = name;
             this.phone = phone;
         }
 
-        /** Copy constructor. */
+        /**
+         * Copy constructor.
+         */
         public Contact(Contact orig) {
             this.name = orig.name;
             this.phone = orig.phone;
@@ -261,17 +183,5 @@ public class PhoneBook {
         public String toString() {
             return String.format("<%s> <%s>", name, phone);
         }
-    }
-
-    public static void main(String[] args) {
-        PhoneBook pb = new PhoneBook();
-        pb.addContact("Galit Israel", "03-9089730");
-        pb.addContact("Avner Chohen", "02-7474747");
-        pb.addContact("Gershon Avraham", "02-8900011");
-        pb.addContact("Daniela Yariv", "04-5677708");
-        pb.addContact("Alice Marlo", "04-5699300");
-        pb.addContact("Bob Denver", "04-5699300");
-
-        System.out.println(pb);
     }
 }
