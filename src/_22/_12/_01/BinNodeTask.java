@@ -1,18 +1,18 @@
 package _22._12._01;
 
 import Reusable.BinNodeUtils;
+import Reusable.ListUtils;
 import unit4.collectionsLib.BinNode;
+import unit4.collectionsLib.Node;
 
 import java.util.Scanner;
 
 
 public class BinNodeTask {
     public static void main(String[] args) {
-        BinNodeUtils.print(BinNodeUtils.makeRandomSorted(7887));
-        System.out.println("--- TASK 3 ---");
-        task3();
-        System.out.println("--- TASK 4 ---");
-        task4();
+        var a = new Node<>(1, new Node<>(2));
+        a.getNext().setNext(a);
+        System.out.println(ListUtils.isCircular(a));
     }
 
     /** Prints the reverse of the given list. */

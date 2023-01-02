@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class Vec2 {
 
-    private double x;
-    private double y;
+    public double x;
+    public double y;
 
     public static Vec2 makeRandom(int min, int max, Random random) {
         return new Vec2(random.nextInt(min, max), random.nextInt(min, max));
@@ -18,22 +18,6 @@ public class Vec2 {
 
     public double size() {
         return Math.sqrt(x * x + y * y);
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     @Override

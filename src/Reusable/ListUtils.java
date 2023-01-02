@@ -177,9 +177,21 @@ public class ListUtils {
         }
 
         // The value is greater than any element in the list and shall be last.
-        // @FIXME Shouldn' set list here?
+        // @FIXME Shouldn't set list here?
         insertAfter(pos, value);
         return list;
+    }
+
+    public static <T> boolean isCircular(Node<T> lst) {
+        for (Node<T> pos = lst; pos != null; pos = pos.getNext()) {
+            for (Node<T> innerPos = lst; innerPos != pos; innerPos = innerPos.getNext()) {
+                if (pos.getNext() == innerPos) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
