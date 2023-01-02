@@ -134,7 +134,7 @@ public class BinNodeUtils {
 
     /** Removes the first element from the list. */
     public static <T> BinNode<T> removeFirst(BinNode<T> list) {
-        // If the list is empty or one element - return an empty list.
+        // If the list is empty or has a single element - return an empty list.
         if (list == null || !list.hasRight()) {
             return null;
         }
@@ -169,14 +169,10 @@ public class BinNodeUtils {
 
     /** Removes the first occurrence of the target from the list. */
     public static <T> BinNode<T> removeFirstOccur(BinNode<T> lst, T target) {
-        // Iterate until we find the target, and remove when found (if ever).
-        for (BinNode<T> pos = lst; pos != null; pos = pos.getRight()) {
-            if (pos.getValue().equals(target)) {
-                return remove(lst, pos);
-            }
-        }
-
-        return lst;
+        // Find the target.
+        BinNode<T> firstOccur = findFirstOccur(lst, target);
+        // Remove it.
+        return remove(lst, firstOccur);
     }
 
     /** Remove all occurrences of the target from the list. */
@@ -233,6 +229,18 @@ public class BinNodeUtils {
         }
 
         return reversedList;
+    }
+
+    /** Get from the list the first node whose value equals to the target. */
+    public static <T> BinNode<T> findFirstOccur(BinNode<T> lst, T target) {
+        // Iterate until we find the target and return it (if we ever find).
+        for (BinNode<T> pos = lst; pos != null; pos = pos.getRight()) {
+            if (pos.getValue().equals(target)) {
+                return pos;
+            }
+        }
+
+        return null;
     }
 
     /** Get a formatted string of the list. */
